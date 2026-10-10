@@ -8,6 +8,12 @@ Research into aerodynamic opportunities for ceiling fans across 28 real-world In
 
 Start with the [project README](README.md) for the full story: how we started, what we found, and where we are heading.
 
+## Approach Research (Body · Reflex · Brain)
+
+- [Body: Passive Thermally Morphing Ceiling Fan](Approach/Resesarch/Passive%20Thermally%20Morphing%20Ceiling%20Fan.md)
+- [Reflex: BLDC Fan Modulation Dynamics](Approach/Resesarch/BLDC%20Fan%20Modulation%20Dynamics.md)
+- [Brain: On-Device Learning Ceiling Fan](Approach/Resesarch/On-Device%20Learning%20Ceiling%20Fan.md)
+
 ## Synthesis
 
 - [Cross-Condition Comparison (28 Conditions)](synthesis/comparison.md)

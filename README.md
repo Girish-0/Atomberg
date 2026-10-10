@@ -1,6 +1,6 @@
-# AtomQuest 2026: Rethinking Ceiling Fan Aerodynamics for Real Indian Rooms
+# AtomQuest 2026: The Fan That Adapts — Body, Reflex and Brain
 
-> **Team repo for Atomberg AtomQuest 2026.** We are designing an **aerodynamics-led** ceiling fan innovation. This repo holds everything we researched, how we scored it, what we concluded, and where we're heading next.
+> **Team repo for Atomberg AtomQuest 2026.** We are building a ceiling fan that **adapts to the room and the person under it** in three ways: blades that **change shape with temperature**, motor speed **patterns** tuned to temperature and humidity, and a **tiny offline AI** that learns how you like your fan. This repo has the research behind every decision.
 
 ![Where a ceiling fan's air goes in a real Indian bedroom](assets/bedroom-airflow.svg)
 
@@ -8,182 +8,268 @@
 
 ## TL;DR
 
-- **Our core finding:** fans are **designed and rated** at *maximum speed in an open test chamber*, but people **use** them at *low speed, at night, over a bed, in a cramped real room*. Nobody designs or measures for that real use.
-- We studied **28 real-world Indian room and usage conditions** (false ceilings, beds under fans, low-speed sleep, cross-drafts, wardrobes, etc.). Each one got its own deep-research dossier.
-- We **scored all 28** on a fixed 7-dimension rubric, grouped them into **6 aerodynamic mechanism clusters**, and narrowed them to **6 addressable gaps**.
-- **Current direction:** the **"night-bedroom regime"** (fan on speed 1–2 over a sleeping person), backed by a **"Real-Room Comfort Rating"** test method that we measure ourselves.
-- **Status:** research and synthesis are ✅ done. We are 🔄 now researching the solution (speed-pattern control, on-device learning, shape-changing blades). Prototype ⏳ next.
+- **The problem we found:** fans are **designed and rated** at *maximum speed in an open test chamber*. People **use** them at *low speed, at night, over a bed, in a real room*, while temperature and humidity change through the night and across seasons. Today's fan does the same thing in all of these situations.
+- **Our approach: one fan, three layers of adaptation.**
 
-## Depth at a glance
+| Layer | What it is | What it reacts to | Electronics needed |
+|---|---|---|---|
+| 🦴 **Body** | **Thermally morphing blade**: a bimetal coil turns a trailing-edge flap | Room temperature, with no sensor at all | **None** |
+| ⚡ **Reflex** | **Climate-tuned speed patterns**: a temperature × humidity speed map plus gentle "natural breeze" modulation | Temperature and humidity sensor | Firmware on the existing BLDC driver |
+| 🧠 **Brain** | **On-device habit learning**: learns the user's comfort offset and applies it after 2 consecutive days | User's remote/app overrides, time, presence | ~₹113 chip, fully offline |
+
+- **Built on evidence:** 28 room-condition dossiers (~123k words) + 3 deep-research reports on the three layers (~24k words), all in this repo.
+- **Status:** problem research ✅ · approach research ✅ · prototype build ⏳ next (budget **≈ ₹10,000**).
+
+---
+
+## 1. Our approach at a glance
+
+```mermaid
+flowchart TB
+    subgraph ROOM[Room conditions]
+        T[Temperature]
+        H[Humidity]
+        P[Person: present / asleep]
+        U[User presses remote]
+    end
+
+    subgraph BODY[🦴 BODY · passive blade]
+        B1[Bimetal coil in blade<br/>senses room air directly]
+        B2[Trailing-edge flap<br/>+~7° per 10 °C]
+    end
+
+    subgraph REFLEX[⚡ REFLEX · speed firmware]
+        R1[T × RH → target air speed → RPM]
+        R2[Breeze / Sleep / Humid-flush<br/>modulation patterns]
+    end
+
+    subgraph BRAIN[🧠 BRAIN · tiny offline AI]
+        A1[Learns comfort offset<br/>from user overrides]
+        A2[2-day rule:<br/>repeat twice → do it on day 3]
+    end
+
+    T --> B1 --> B2
+    T --> R1
+    H --> R1
+    P --> A1
+    U --> A1 --> A2
+    A2 -->|shifts target| R1
+    R1 --> R2 --> M[BLDC motor RPM]
+    B2 --> AIR[Air delivered to the person]
+    M --> AIR
+```
+
+**Why three layers and not one:**
+- The **Body** works even with **no power to the electronics, no Wi-Fi and no app**. It is the most robust layer and the most patentable.
+- The **Reflex** turns comfort science (ASHRAE 55, the Indian adaptive comfort model IMAC) into motor behaviour, using hardware the fan already has.
+- The **Brain** handles what physics can't predict: *this* person likes it a bit cooler or warmer than the average person.
+
+Each layer stands on its own, so we can demo and test them separately, then show them together.
+
+---
+
+## 2. Layer 1 — 🦴 Body: a blade that changes shape with temperature
+
+**Report:** [Passive Thermally Morphing Ceiling Fan](Approach/Resesarch/Passive%20Thermally%20Morphing%20Ceiling%20Fan.md)
+
+**The idea:** when the room is warm (~28–38 °C), the blade bends into a **higher-pitch, more cambered** shape and pushes more air. When it's cool (~15–24 °C), it **flattens** back and gives a gentle draft-free circulation. No motor, no sensor, no wiring.
+
+### What the research says about materials
+We asked for a material with two shapes at two temperatures. The research ranked 8 options:
+
+| Rank | Material / mechanism | Verdict | Why |
+|---|---|---|---|
+| **1** | **Thermostatic bimetal (helical coil)** | ✅ **Primary choice** | Zero hysteresis, no fatigue, linear and repeatable, cheap (₹800–1,500/kg), proven for decades in rotating car fan clutches |
+| **2** | **NiTi shape-memory wire + steel bias spring** | ✅ Backup / "snap" version | High force, clear two-state motion, but needs a custom alloy so the switch happens at 27–33 °C |
+| 3 | Paraffin wax actuator | ⚠️ Marginal | Heavy (50–120 g), slow (1–3 min), seals wear out |
+| 4 | "Trained" two-way NiTi | ❌ | Shape memory decays 30–60% over time |
+| 5–8 | 4D-printed bilayers, Cu-based SMA, shape-memory polymers, liquid crystal elastomers | ❌ | Too soft for a spinning blade (creep, flutter) or too little movement over a 10 °C swing |
+
+> **Key insight:** a true "two-way" smart material is the wrong choice. A **bimetal** is two-way by nature. For NiTi, a **one-way alloy plus a return spring** gives reliable two-way motion without the decay.
+
+### Where on the blade
+| Location | Verdict |
+|---|---|
+| Whole-blade twist | ❌ Too flexible, flutter risk |
+| Root pitch hinge | ⚠️ Biggest effect, but the bearing must carry the full ~107 N centrifugal load at 350 RPM |
+| Tip winglet | ❌ Changes air delivery by < 3% (helps noise only) |
+| **Trailing-edge flap, outer 30–40% of span** | ✅ **Best balance**: the rigid front 75% of the blade carries the loads, and the 15 g flap sees only ~9 N |
+
+### Key numbers (from the report)
+- A **250 mm bimetal coil** rotates **~7.4°** for a 10 °C change, with no linkage needed.
+- A **100 mm NiTi wire** on a 25 mm crank gives **~5.7°**.
+- A **+3° pitch change** (10° → 13°) should give **+11–14% air delivery**. The report targets **12–18%**.
+- Thin metal actuators respond to room temperature in **under a minute**. Polymers and wax take 3–10 minutes.
+- **Patent picture:** the closest prior art is expired (Aisin 1982 wax/bimetal car fan pitch, US 4,487,551) or covers other fan types (a CN 2025 bimetal solar attic fan). The report found **no active claim on passively morphing ceiling-fan blades**. This still has to be verified.
+
+### Two concepts to prototype
+- **Concept A (primary):** a helical bimetal coil in a small fairing drives a trailing-edge flap. Smooth and proportional to temperature, with nothing to wear out.
+- **Concept B:** a NiTi wire plus bias spring in the blade root rotates the whole blade between two pitch stops. Two distinct states, with a fail-safe spring return to low pitch.
+
+### Risks we must prove away
+- **Balance:** all 3 blades must morph the same way. This needs actuators matched in sets of 3 and blade-tip tracking within ~2 mm.
+- **Galvanic corrosion:** bimetal or NiTi touching aluminium in monsoon humidity. Fix: POM bushings and nickel plating.
+- **Overshoot at 45 °C+:** this needs hard travel stops.
+- **Standards:** the fan must pass the IEC 60335-2-80 overspeed test (1.25× RPM) and keep its BEE star rating. Hot mode draws **~3.5–5 W more**.
+
+---
+
+## 3. Layer 2 — ⚡ Reflex: speed patterns tuned to climate
+
+**Report:** [BLDC Fan Modulation Dynamics](Approach/Resesarch/BLDC%20Fan%20Modulation%20Dynamics.md)
+
+**The question we asked:** are there speeds or speed patterns that spread air better or feel cooler at different temperatures and humidity?
+
+### What we learned (proven vs. myth)
+| Claim | Status | What it means for us |
+|---|---|---|
+| A specific RPM **widens** the air cone | ❌ **Disproven** | The jet's spreading angle stays the same at any RPM. Room coverage comes from the **wall jet along the floor**, so more RPM helps coverage only *indirectly*. |
+| Fluctuating "natural breeze" air **feels cooler** than steady air | ✅ **Proven** | Human studies: fluctuations of **0.2–1.0 Hz (peak ~0.5 Hz)** feel cooler, with a *1/f* (pink-noise) pattern like natural wind. |
+| Faster modulation saves energy | ❌ **Disproven** | Speeding up and slowing down costs energy. Gentle modulation adds **~+4%**, aggressive modulation **~+28%**. |
+| More air always helps in humid heat | ⚠️ **Only up to a point** | Above **~32 °C and 70% RH** sweat can't evaporate, so extra speed adds little. Above ~35–40 °C with high humidity, the fan can even *heat* you. |
+
+### The engineering catch, and our answer
+A 1200 mm fan is heavy (rotational inertia ≈ 0.05–0.07 kg·m²). The motor **cannot** swing it at the "ideal" 0.5 Hz without heating up and getting noisy. The research's answer is a **two-tier design**:
+1. **Firmware macro-modulation:** slow swings every **10–30 s** of **±10–15%** RPM, with gentle S-curve ramps.
+2. **Aerodynamic micro-turbulence:** the blade tips and wake already create the fast **0.3–1.5 Hz** flutter at the person.
+
+> 💡 **This links Layer 1 and Layer 2.** The report lists **passive blade-flutter for micro-gusts** as an *unexplored research gap*. Our morphing flap is the natural place to explore it.
+
+### Three firmware modes we will build
+| Mode | When | Pattern |
+|---|---|---|
+| **Natural Breeze** | Daytime, 26–32 °C | Base RPM from the T×RH table, plus 3 overlaid slow waves (pink-noise-like), accel ≤ 12 RPM/s |
+| **Sleep Breeze** | Night | Base speed kept in the **50–150 RPM quiet band (< 32 dBA)**, ±15 RPM over 50 s, accel ≤ **2–3 RPM/s** so the pitch change can't wake you; base steps down as the room cools |
+| **Humid Flush** | Monsoon / coastal, hot and humid | Low base speed with a short burst every ~45 s to clear moist air off the skin |
+
+The report also gives a **temperature × humidity → air speed → RPM table** (16 rows, 50–350 RPM). The Reflex layer uses it as its lookup.
+
+### Patents
+- Panasonic's **1/f "Yuragi" breeze patent has expired**, so the core idea is in the public domain.
+- To design around: Big Ass Fans **US 9,103,346** (SET comfort control with IR occupancy), Xiaomi/Smartmi **CN 107676343** (replaying recorded wind), Crompton **IN 576195** (fan–AC coordination).
+- **Atomberg today** uses a timer sleep mode that steps speed down every 1.5–2 h (the two reports give different intervals; this needs checking). It has no temperature or humidity sensing, so there is a clear upgrade path.
+
+---
+
+## 4. Layer 3 — 🧠 Brain: a tiny offline AI that learns you
+
+**Report:** [On-Device Learning Ceiling Fan](Approach/Resesarch/On-Device%20Learning%20Ceiling%20Fan.md)
+
+**The idea:** the fan quietly watches how you use it. If you change the speed at about the same time **two days in a row**, it does it for you **on day 3**. A one-off change is ignored. Everything runs on the fan with no cloud.
+
+### Key findings
+- **No neural network needed.** Neural nets on microcontrollers need too much memory, forget old habits, and wear out flash memory. A **Bayesian counter + 2-day hysteresis rule** does the job in **< 2 KB of RAM**, in under 100 clock cycles.
+- **Learn the comfort offset, not the clock.** If you pick speed 4 during a 34 °C heatwave, a clock-based fan will still run speed 4 when the monsoon drops the room to 25 °C. Instead, the Brain learns *"this user likes ~X °C cooler than the comfort model says"* and applies it to the Reflex layer's temperature/humidity map. This also **designs around Nest's schedule-learning patents** (US 8,630,742 family).
+- **Chip:** **ESP32-C6** (~₹113 in volume; RISC-V 160 MHz, 512 KB RAM, Wi-Fi 6/BLE). It is the same family as the Wi-Fi modules already used in Indian smart fans. It talks to the existing motor controller over UART.
+- **Sensors:** SHT40 temperature/humidity (critical), a **24 GHz mmWave radar** that sees a *sleeping* person breathing (PIR misses them), and an ambient light sensor that picks up the "lights off = bedtime" signal.
+
+### Algorithm choice
+| Option | Verdict |
+|---|---|
+| **Binned habit table + Bayesian (Beta) update + 2-day finite-state counter** | ✅ Chosen: tiny, predictable, adapts in exactly 2 days |
+| Exponential moving average | ⚠️ A single override shifts it |
+| Contextual bandit (LinUCB) | ⚠️ "Exploring" an uncomfortable speed at night loses user trust |
+| Hoeffding trees / tiny RNN | ❌ Need months of data / forget unpredictably |
+
+### Real-life details already designed
+- **Cold start:** 2-day observation mode, then a safe default comfort curve.
+- **Two people disagree:** default toward the lower speed.
+- **Seasons:** old habits fade. If the weekly mean temperature shifts a lot, control falls back to physics until new habits form.
+- **Power cuts (very common in India):** write to flash once a day, plus an emergency save in ~12 ms when a brownout is detected.
+- **Privacy:** 100% local, which keeps it simple under the DPDP Act 2023. Holding the remote button for 10 s wipes all learned data.
+- **Trust:** an LED pulses before any automatic change, and a manual command always wins within 50 ms.
+- **Success metric:** manual adjustments per day fall to near zero within **7–10 days**, tested first on a **30-day synthetic user simulation**.
+
+---
+
+## 5. How the three layers work together (our new synthesis)
+
+These points come from reading the three reports *together*, not from any single one.
+
+1. **One shared "comfort target".** The Reflex layer turns T × RH into a target air speed. The Brain only *shifts* that target. The Body changes how much air each RPM delivers. So the motor controller always aims at **air speed at the person**, not a fixed speed step.
+2. **Don't double-count temperature.** When it gets hot, the blade already pushes ~12% more air at the same RPM. If the Reflex layer also raises RPM, the fan overshoots. **The firmware must know the blade's state.** It can infer it from motor current, because a morphed blade draws ~3.5–5 W more at the same RPM, so this is free to sense.
+3. **The Body is the safety net.** If the electronics fail or the user switches smart mode off, the blade still adapts. With a plain wall regulator the fan is *still* smarter than a normal fan.
+4. **Morphing flap + gusts = an open research gap.** Using the flap's flexibility to create natural micro-gusts at steady RPM is listed as **unexplored** in the modulation report. This could be our most novel claim.
+5. **Sleep is where all three layers meet:** quiet band and slow ramps (Reflex) + learned bedtime offset (Brain) + flatter blade as the room cools overnight (Body). This is the **"night-bedroom regime"** our first-phase research ranked #1.
+
+---
+
+## 6. Prototype plan
+
+| Step | What | Proves |
+|---|---|---|
+| 1 | **Static chamber test:** blade flap in a 15 → 45 °C box, laser-on-mirror deflection | Morph angle and hysteresis (Layer 1) |
+| 2 | **Spin test:** 50–350 RPM on a BLDC stand, strobe for tip tracking, wattmeter | Balance and power (Layer 1) |
+| 3 | **Airflow test:** vane anemometer grid 1.5 m below, room at ~20 °C vs 35 °C | +12–18% air delivery claim (Layer 1) |
+| 4 | **Breeze modes** on the motor driver: anemometer at bed height, sound meter | Comfort pattern, < 32 dBA in sleep mode, energy penalty (Layer 2) |
+| 5 | **Habit engine** on an ESP32-C6: 30-day synthetic log, then live use | 2-day rule, rejecting one-offs, adapting to weather (Layer 3) |
+
+**Prototype bill of materials (from the morphing report, Indian sourcing):** bimetal strip (Shivalik TB 2011), NiTi wire, springs, bearings, PETG flaps, a baseline Atomberg Renesa fan and an anemometer set: **≈ ₹9,989**. Electronics for Layers 2–3 (ESP32-C6 dev board, SHT40, LD2410 radar) are extra, roughly ₹1,500–2,000 (our estimate).
+
+---
+
+## 7. How we got here: problem research (phase 1)
+
+Before choosing a solution, we mapped **where a fan actually under-performs** in Indian homes.
 
 | What | How much |
 |---|---|
 | Room / usage conditions researched | **28** |
 | Condition dossiers | **28** files, ~**123,000 words**, 12 sections each |
-| Unique sources cited (papers, patents, standards, product pages) | **~600 links** |
-| Claims explicitly flagged `[UNVERIFIED]` | **650+** (we tag what we couldn't confirm instead of hiding it) |
-| Scoring cards (verified against the dossiers) | **28**, across 4 files |
-| Synthesis documents | comparison, gaps, re-evaluation, rubric (~29,000 words) |
-| Follow-up research prompts queued | **3** tech tracks |
-
----
-
-## 1. How we started
-
-**The brief:** AtomQuest 2026 asks for a next-generation ceiling fan. We chose to compete on **aerodynamics**: blade geometry, airflow shaping and RPM control. Electronics or styling were not our focus.
-
-**The question we asked first:** *"Where does a ceiling fan actually under-perform in Indian homes, and is aerodynamics the fix?"*
-
-Instead of jumping to a blade design, we listed every real situation a fan in India actually faces. That gave us 28 conditions, in five groups:
-
-| Group | Conditions |
-|---|---|
-| **Ceiling & mounting** | 01 false-ceiling cove · 02 low ceiling / hugger · 03 high ceiling · 04 sloped ceiling · 05 beams · 06 light kit · 07 corner / near-wall |
-| **Room shape & scale** | 08 multi-fan hall · 09 long narrow room · 10 small room · 11 open plan · 12 balcony / veranda |
-| **Heat & climate** | 13 stratification · 14 sunlit wall · 15 hot roof · 16 humidity / monsoon · 17 fan + AC · 18 exhaust pressure · 19 cross-ventilation · 20 dust / grease |
-| **Furniture & people** | 21 tall wardrobes · 22 bed / table under fan · 23 mosquito nets · 24 soft furnishings · 25 high occupancy |
-| **Operation & hardware** | 26 voltage / inverter · 27 low-speed / sleep · 28 wobble / vibration |
-
-## 2. How we researched (method)
+| Unique sources cited | **~600 links** |
+| Claims flagged `[UNVERIFIED]` | **650+** (we tag what we couldn't confirm instead of hiding it) |
+| Approach research reports | **3** (~24,000 words) |
 
 ```mermaid
 flowchart LR
-    A[28 room conditions<br/>listed] --> B[Standard research prompt<br/>Part A framework +<br/>Part B condition brief]
-    B --> C[28 deep-research<br/>dossiers<br/>research/]
-    C --> D[Fixed scoring rubric<br/>7 dimensions, max 40]
-    D --> E[28 verified score cards<br/>synthesis/cards-*.md]
-    E --> F[Cross-condition comparison<br/>tiers + 6 clusters]
-    F --> G[6 addressable gaps<br/>gaps.md]
-    G --> H[Hostile re-evaluation<br/>reevaluation.md]
-    H --> I[Solution research<br/>research_prompts_tech.md]
-    I --> J[Prototype + own<br/>test rig]
-    style I fill:#fff3cd,stroke:#e0a800
-    style J fill:#eeeeee,stroke:#999
+    A[28 room conditions] --> B[28 deep-research<br/>dossiers]
+    B --> C[Scoring rubric<br/>7 dimensions]
+    C --> D[Comparison<br/>6 clusters · 6 gaps]
+    D --> E[Hostile<br/>re-evaluation]
+    E --> F[3 approach<br/>research tracks]
+    F --> G[Body · Reflex · Brain<br/>adaptive fan]
+    G --> H[Prototype +<br/>test rig]
+    style F fill:#d4edda,stroke:#28a745
+    style G fill:#d4edda,stroke:#28a745
+    style H fill:#eeeeee,stroke:#999
 ```
-
-1. **One prompt framework for all 28.** [`research_prompts_room_conditions.md`](research_prompts_room_conditions.md) has a shared *Part A* (role, Indian context: 2.6–3.2 m ceilings, 1200 mm sweep, 230 V with fluctuations, IS 374:2019, BEE star rating, ASHRAE 55, ISO 7730) plus one *Part B* brief per condition. Every condition was researched in its own deep-research session, so each dossier goes deep and all of them have the same structure.
-2. **Every dossier has the same 12 sections.** Condition definition → aerodynamic physics → role of RPM → blade/fan geometry levers → materials → market solutions → academic research → **patent landscape** → unsolved gaps → **measurement plan** → sensors/smart control → summary + sources.
-3. **A fixed scoring rubric, applied by every reviewer** ([`synthesis/rubric.md`](synthesis/rubric.md)):
-
-   `TOTAL = FREQ + SEV + UNSOLVED + PATENT_ROOM + 2×AERO_FIT + EVIDENCE + PROTO` (max 40)
-
-   AERO_FIT is **double-weighted** because the pitch is aerodynamics-led. Calibration anchors keep the batches comparable (e.g. EVIDENCE 5 only with condition-specific measured data).
-4. **Cards were checked against the dossiers.** Each card's scores cite the report section they come from, numbers are copied exactly, and `[UNVERIFIED]` tags are kept.
-5. **Hostile-panel review.** The comparison was audited from four viewpoints (aerodynamicist, Atomberg PM, hackathon judge, patent analyst). See the review log at the end of [`comparison.md`](synthesis/comparison.md).
-6. **We then challenged our own conclusions** in [`reevaluation.md`](synthesis/reevaluation.md).
-
-## 3. What we found
 
 ![Scores of all 28 conditions](assets/condition-scores.svg)
 
-### 3.1 Six mechanism clusters
-The 28 conditions are not 28 separate problems. They come down to a handful of **shared aerodynamic mechanisms**:
+**What phase 1 told us, and how the approach answers it:**
 
-| Cluster | Mechanism | Conditions | Combined score |
-|---|---|---|---|
-| **A** Hub / inflow starvation | Short blade-to-ceiling clearance or hub blockage starves the jet at its source | 01, 02, 05, 06 | 115 |
-| **B** Asymmetric boundary | Wall, slope, wardrobe or corridor on one side → lopsided flow, 1P cyclic loading | 04, 07, 09, 21 | 117 |
-| **C** External-flow competition | Cross-draft, exhaust, solar plume or hot ceiling layer fights the jet | 19, 18, 14, 13, 03 | 139 |
-| **D** Low-Reynolds regime | At low RPM the blade drops to chord Re ~10⁴ → early separation, lift loss | 27, 23 | 61 |
-| **E** Furniture / floor-jet | Bed or table raises the impingement plane → turbulence at the occupant | 22, 24 | 56 |
-| **F** System / multi-fan | Uniformity across a room needs coordinated control and spacing | 08, 09, 11, 25 | 120 |
+| Phase-1 gap ([`gaps.md`](synthesis/gaps.md)) | Addressed by |
+|---|---|
+| **G2** Blades are designed for top speed but run at speed 1–2 all night | 🦴 Body (low pitch when cool) + ⚡ Sleep Breeze mode |
+| **G3** One fixed blade must serve two regimes; no product changes shape automatically | 🦴 **Body: this is exactly the morphing blade** |
+| **G4** Every "sleep mode" just slows down; none changes the air pattern over the bed | ⚡ Sleep Breeze modulation + 🦴 flatter blade |
+| **G5** The fan doesn't know its room (temperature, humidity, presence) | ⚡ T×RH map + 🧠 radar / learning |
+| **G1** Ratings only measure max speed in an open chamber | Our test rig measures low-speed, at-the-bed, hot vs. cool performance |
 
-**Out of scope for an aero pitch:** 15 hot roof (radiant heat), 16 humidity (materials), 17 fan + AC (control), 18 exhaust (room pressure), 20 dust (coatings), 26 voltage (BLDC already solves it), 28 wobble (mechanical balance).
+Full method: one prompt framework for all 28 ([`research_prompts_room_conditions.md`](research_prompts_room_conditions.md)), a fixed rubric ([`synthesis/rubric.md`](synthesis/rubric.md)), verified score cards, a hostile-panel review ([`comparison.md`](synthesis/comparison.md)) and our own critical re-evaluation ([`reevaluation.md`](synthesis/reevaluation.md)).
 
-### 3.2 Six addressable gaps ([`gaps.md`](synthesis/gaps.md))
+---
 
-```mermaid
-mindmap
-  root((Aero-led<br/>fan gaps))
-    G1 Measurement
-      No low-speed rating
-      No as-installed rating
-      No air speed at bed / seat
-    G2 Low-speed blade
-      Blades tuned for max RPM
-      Low-Re separation at speed 1-2
-    G3 Fixed geometry
-      One blade, two regimes
-      Passive RPM-dependent twist
-    G4 Jet shaping
-      Bed under fan
-      Wider, gentler outflow
-    G5 Fan senses room
-      Cross-draft, AC, stratification
-      Self-calibrating install
-    G6 Install geometry
-      Corner, slope, cove, hugger
-      Clearance vs delivery curve
-```
-
-| Gap | One-line summary | Covers |
-|---|---|---|
-| **G1 Measurement** ★ | Star ratings measure max speed in an open chamber. Nobody rates low-speed, as-installed, or at-the-bed performance | 27, 22, 01, 02, 03, 10, 11, 25 |
-| **G2 Low-speed blade** ★ | Blades are designed for top speed but run at speed 1–2 for hours each night | 27, 23, 25 |
-| **G3 Fixed geometry** ★ | No product or patent in our sources changes blade twist *automatically* with RPM: white space (to be prior-art checked) | 27, 22 |
-| **G4 Jet shaping** ★ | Every "sleep mode" just slows the fan. None changes the *shape* of the jet over the bed | 22, 10, 02, 21 |
-| **G5 Room-aware fan** | The fan doesn't sense drafts, AC, stratification or how it was installed | 19, 18, 14, 17, 13, 01, 02, 04, 07, 28 |
-| **G6 Install geometry** | No data exists on corner, slope, cove or hugger installs | 01, 02, 04, 05, 06, 07, 09 |
-
-### 3.3 Key evidence we're building on
-- The CBE Berkeley desk study shows the jet stays within blade-tip width until **< 0.6 m** from a surface. At 0.3 m the speed is **~50%** of the jet peak, so a bed under the fan moves the turbulent impingement zone up to the sleeper (R22 §2).
-- Patent literature claims low-RPM-optimised blades give the same airflow at **~140 RPM** that a normal blade needs **~270 RPM** for, and up to **~26%** more air at low speed. These are the vendor's own claims, not independently replicated (R27 §2).
-- At **120 RPM**, tip speed is ≈ **7.5 m/s** and the chord Reynolds number falls toward **~10⁴**. That is a different aerodynamic regime from full speed (R27 §2).
-- Cross-ventilation air speeds in Indian homes are typically **0.19–0.83 m/s** (R19 §1).
-- **IS 374 / BEE star testing appears to cover max speed only.** This is marked `[UNVERIFIED]`, and checking the clause text is on our to-do list.
-
-> **Honesty note:** every top-ranked condition has EVIDENCE 1–3. None of them has a primary, Indian-residential, condition-specific measurement. That is a weakness, **and also our opportunity:** one cheap test rig would produce data nobody has published.
-
-## 4. What we concluded (after re-evaluation)
-
-The first-pass Top 3 was **22 (bed under fan), 27 (low-speed sleep) and 19 (cross-ventilation)**. A critical second pass ([`reevaluation.md`](synthesis/reevaluation.md)) changed that:
-
-- Tier-1 scores differ by **0–3 points**, which is within noise. So we **pitch by mechanism and user moment**, not by score.
-- **22 and 27 are the same moment:** a fan on speed 1–2 at night over a bed. We merged them into a single **"Night-bedroom regime"** target.
-- **19 was demoted** to a stretch test. Fan downwash (~2–4 m/s) usually overpowers room drafts (0.2–0.8 m/s).
-- The "Dual-Regime" concept conflicts with itself: a single fixed blade can't optimise both low-RPM lift and a flatter jet. That is exactly why **G3 (passive RPM-dependent twist)** is interesting.
-
-**Re-ranked direction:**
-1. **Night-bedroom regime** (22 + 27, with G2/G3 as the levers)
-2. **Real-Room Comfort Rating** (G1): the measurement method that proves #1
-3. **Hub / inflow starvation** (01 + 02): false ceilings and huggers, using a clearance-vs-delivery curve
-4. *Stretch:* cross-draft (19) and uniformity (25) as extra test cases on the same rig
-
-## 5. How we're proceeding
+## 8. Status
 
 | Phase | Status | Output |
 |---|---|---|
-| 1. List 28 real room conditions + prompt framework | ✅ Done | `research_prompts_room_conditions.md` |
-| 2. Deep research, one dossier per condition | ✅ Done | `research/01–28` |
-| 3. Rubric scoring, comparison, clusters, gaps | ✅ Done (2026-10-09) | `synthesis/` |
-| 4. Hostile re-evaluation of our own findings | ✅ Done (2026-10-10) | `synthesis/reevaluation.md` |
-| 5. Solution research (3 tech tracks) + verify list | 🔄 In progress | `research_prompts_tech.md` |
-| 6. Test rig + baseline data on a stock fan | ⏳ Next | first real-room dataset |
-| 7. Prototype blade / control, A/B test | ⏳ Next | measured improvement |
-| 8. Pitch | ⏳ Next | deck + demo |
-
-### Solution research in progress ([`research_prompts_tech.md`](research_prompts_tech.md))
-1. **Speed-pattern control:** can modulating RPM (natural-breeze gusts) instead of holding a steady speed spread air better and feel cooler at a given temperature and humidity?
-2. **On-device tiny AI:** a fully offline model that learns the user's habits (e.g. "changed speed at 11 pm two days running → do it automatically on day 3").
-3. **Temperature-triggered shape-changing blades:** SMA, bimetal, LCE or wax actuators that change blade pitch or camber passively between ~25 and 35 °C.
-
-### Planned test rig (our own first-of-its-kind dataset)
-| Test | Measures | Gap |
-|---|---|---|
-| Speeds 1–5, not just max | Service value (m³/min/W) and air-speed map | G1, G2 |
-| Bed vs open floor | Air speed and turbulence at 0.6 m (lying) and 1.1 m (seated) | G4 |
-| Box fan as cross-draft (0.3–1.0 m/s) | How far the downwash gets pushed | G5 |
-| Hugger vs downrod, mock cove | Clearance-vs-delivery curve | G6 |
-
-Tools: anemometer grid, smoke visualisation, true-RMS power meter, sound meter (dB(A)).
+| 1. 28 real room conditions + deep research | ✅ Done | `research/01–28` |
+| 2. Scoring, comparison, clusters, gaps, re-evaluation | ✅ Done (2026-10-10) | `synthesis/` |
+| 3. Approach research: Body · Reflex · Brain | ✅ Done (2026-10-10) | `Approach/Resesarch/` |
+| 4. Prototype morphing blade (Concept A, then B) | ⏳ Next | deflection, balance, airflow data |
+| 5. Firmware breeze modes + habit engine | ⏳ Next | sound, comfort, simulation results |
+| 6. Integrated demo + pitch | ⏳ Next | deck + live demo |
 
 ### Verify before the pitch
-- [ ] IS 374:2019 clause text and BEE star-label test speed
-- [ ] Legal status of the whole US 6,039,541 patent family
-- [ ] Prior art for passive / aeroelastic variable twist (wind turbines, propellers, fans)
-- [ ] Atomberg's RPM per speed step and blade material
-- [ ] Full text of Jayasree et al. 2022
-- [ ] Quick user survey or review mining to replace the FREQ guesses
+The approach reports are AI deep-research output. Many numbers are model-derived and some patent entries may be inaccurate. Check these before we quote them:
+- [ ] **Patent white space for morphing ceiling-fan blades:** run our own Google Patents / InPASS search, plus wind-turbine and propeller prior art
+- [ ] Every patent number cited in the three reports (assignee, status). Watch especially the Indian entries (Havells, Atomberg, Crompton)
+- [ ] The **+12–18% air delivery** and **+3.5–5 W** figures, by measuring them ourselves (step 3)
+- [ ] The T×RH → RPM table and the 0.2–1.0 Hz comfort band, against the original Tsinghua / CBE papers
+- [ ] Bimetal flexivity and price from Shivalik's datasheet
+- [ ] What Atomberg's sleep mode actually does (90 min vs 2 h step)
+- [ ] IS 374:2019 clause text: is low-speed testing really absent?
 
 ---
 
@@ -192,30 +278,32 @@ Tools: anemometer grid, smoke visualisation, true-RMS power meter, sound meter (
 ```
 .
 ├── README.md                              ← you are here (project story)
-├── assets/                                ← diagrams used in the docs
-├── research_prompts_room_conditions.md    ← prompt framework used for all 28 dossiers
-├── research_prompts_tech.md               ← next-phase solution research prompts
-├── research/                              ← 28 condition dossiers (raw evidence)
-│   └── README.md                          ← index with scores and tiers
-└── synthesis/                             ← scoring, comparison, gaps, re-evaluation
-    └── README.md                          ← reading order
+├── Approach/Resesarch/                    ← ★ approach research (3 reports)
+│   ├── Passive Thermally Morphing Ceiling Fan.md   ← 🦴 Body
+│   ├── BLDC Fan Modulation Dynamics.md             ← ⚡ Reflex
+│   └── On-Device Learning Ceiling Fan.md           ← 🧠 Brain
+├── assets/                                ← diagrams
+├── research/                              ← 28 condition dossiers (problem research)
+├── synthesis/                             ← scoring, comparison, gaps, re-evaluation
+├── research_prompts_room_conditions.md    ← prompt used for the 28 dossiers
+└── research_prompts_tech.md               ← prompts used for the 3 approach reports
 ```
 
 ### Suggested reading order for teammates
 1. This README (10 min)
-2. [`synthesis/reevaluation.md`](synthesis/reevaluation.md): where we stand now (5 min)
-3. [`synthesis/gaps.md`](synthesis/gaps.md): the 6 gaps (10 min)
-4. [`synthesis/comparison.md`](synthesis/comparison.md): full matrix, clusters, targets, risks (30 min)
-5. Any dossier in [`research/`](research/) for deep detail, e.g. [22 bed under fan](research/22-bed-table-under-fan.md) or [27 low-speed sleep](research/27-low-speed-sleep.md)
+2. The approach report for your layer: [Body](Approach/Resesarch/Passive%20Thermally%20Morphing%20Ceiling%20Fan.md) · [Reflex](Approach/Resesarch/BLDC%20Fan%20Modulation%20Dynamics.md) · [Brain](Approach/Resesarch/On-Device%20Learning%20Ceiling%20Fan.md) (30 min)
+3. [`synthesis/reevaluation.md`](synthesis/reevaluation.md): why we chose this direction (5 min)
+4. [`synthesis/gaps.md`](synthesis/gaps.md) and [`comparison.md`](synthesis/comparison.md) for the full problem analysis
+
+> **Note:** the approach reports were exported from Google Docs, so their equations are embedded images. Read them in a Markdown viewer that renders images (GitHub, VS Code preview).
 
 ## How to read the evidence
 - `R22 §2` means **research dossier 22, section 2**.
 - `[UNVERIFIED]` means we found the claim but couldn't confirm it from a primary source. Don't quote it in the pitch without checking it first.
-- `NB` in `gaps.md` marks answers from a NotebookLM follow-up over the dossiers.
 - Patent numbers are **directional**, not a freedom-to-operate opinion.
 
 ## Team
 AtomQuest 2026 team: Girish N and teammates. *(Add names and roles here.)*
 
 ## Credits
-Research dossiers were produced with deep-research AI tools using the prompts in this repo, then scored, cross-checked and re-evaluated by the team. Diagrams in `assets/` are our own schematics drawn from the dossier findings.
+Research dossiers and approach reports were produced with deep-research AI tools using the prompts in this repo, then scored, cross-checked and re-evaluated by the team. Diagrams in `assets/` are our own schematics drawn from the findings.
