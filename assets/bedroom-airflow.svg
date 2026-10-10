@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="12">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f7a8c"/></marker>
+    <marker id="r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="20" y="28" font-size="17" font-weight="700" fill="#1b2a3a">Where a ceiling fan's air goes in a real Indian bedroom (cross-section, schematic)</text>
+  <text x="20" y="47" fill="#5b6b7b">Ideal fan test = open chamber, max speed. Real use = low speed, bed under fan, walls, furniture, drafts. Numbers = condition IDs.</text>
+
+  <!-- room -->
+  <rect x="60" y="70" width="560" height="360" fill="#f6f9fb" stroke="#1b2a3a" stroke-width="2"/>
+  <text x="440" y="86" fill="#5b6b7b">ceiling ≈ 2.6–3.2 m</text>
+  <text x="66" y="424" fill="#5b6b7b">floor</text>
+
+  <!-- false ceiling cove -->
+  <rect x="250" y="70" width="180" height="22" fill="#e3e9ee" stroke="#9aa9b6"/>
+  <text x="340" y="85" text-anchor="middle" fill="#5b6b7b" font-size="11">false-ceiling cove (01)</text>
+
+  <!-- fan -->
+  <line x1="340" y1="92" x2="340" y2="125" stroke="#1b2a3a" stroke-width="3"/>
+  <ellipse cx="340" cy="130" rx="18" ry="8" fill="#1b2a3a"/>
+  <line x1="200" y1="130" x2="480" y2="130" stroke="#1b2a3a" stroke-width="4" stroke-linecap="round"/>
+  <text x="470" y="150" fill="#1b2a3a" font-weight="600">1200 mm blade</text>
+
+  <!-- inflow -->
+  <path d="M195 104 Q222 106 228 122" fill="none" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M510 110 Q465 108 455 122" fill="none" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <text x="66" y="104" fill="#c0392b" font-size="11">inflow starved by short</text>
+  <text x="66" y="117" fill="#c0392b" font-size="11">clearance (01, 02, 05, 06)</text>
+
+  <!-- jet -->
+  <path d="M215 140 L240 232" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M290 140 L294 232" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M390 140 L386 232" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M465 140 L440 232" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="236" y="186" width="208" height="34" rx="4" fill="#f6f9fb"/>
+  <text x="340" y="200" text-anchor="middle" fill="#1f7a8c" font-weight="600">downwash jet</text>
+  <text x="340" y="215" text-anchor="middle" fill="#c0392b" font-size="11">speed 1–2 at night: low-Re blade (27)</text>
+
+  <!-- bed -->
+  <rect x="215" y="268" width="250" height="40" rx="6" fill="#f2d7b6" stroke="#a0784a"/>
+  <rect x="215" y="308" width="12" height="122" fill="#a0784a"/>
+  <rect x="453" y="308" width="12" height="122" fill="#a0784a"/>
+  <text x="340" y="293" text-anchor="middle" fill="#6b4a26" font-weight="600">bed ≈ 0.6 m (person lying here)</text>
+  <path d="M300 245 q10 -8 20 0 q10 8 20 0 q10 -8 20 0 q10 8 20 0" fill="none" stroke="#c0392b" stroke-width="2"/>
+  <text x="340" y="262" text-anchor="middle" fill="#c0392b" font-size="11">impingement + gusty turbulence at the sleeper (22)</text>
+
+  <!-- spread over bed edges -->
+  <path d="M215 275 Q160 290 150 360" fill="none" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M465 275 Q520 290 530 360" fill="none" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <!-- floor jet + return -->
+  <path d="M150 400 L80 400 L80 175 Q80 145 125 145" fill="none" stroke="#1f7a8c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="88" y="250" fill="#1f7a8c" font-size="11" transform="rotate(-90 88 250)">wall return loop</text>
+
+  <!-- wardrobe -->
+  <rect x="560" y="140" width="58" height="290" fill="#cfd8e0" stroke="#7d8d9b"/>
+  <text x="589" y="290" text-anchor="middle" fill="#3d4d5b" font-size="11" transform="rotate(-90 589 290)">tall wardrobe blocks return (21)</text>
+  <path d="M530 400 L552 400" stroke="#c0392b" stroke-width="2" marker-end="url(#r)"/>
+
+  <!-- cross draft -->
+  <path d="M700 200 L630 200" stroke="#c0392b" stroke-width="3" marker-end="url(#r)"/>
+  <path d="M700 225 L630 225" stroke="#c0392b" stroke-width="3" marker-end="url(#r)"/>
+  <text x="640" y="180" fill="#c0392b" font-size="11">window draft</text>
+  <text x="640" y="245" fill="#c0392b" font-size="11">0.2–0.8 m/s</text>
+  <text x="640" y="259" fill="#c0392b" font-size="11">bends the jet (19)</text>
+
+  <!-- legend -->
+  <line x1="640" y1="320" x2="670" y2="320" stroke="#1f7a8c" stroke-width="2" marker-end="url(#a)"/>
+  <text x="676" y="324" fill="#1b2a3a">airflow</text>
+  <line x1="640" y1="345" x2="670" y2="345" stroke="#c0392b" stroke-width="2" marker-end="url(#r)"/>
+  <text x="676" y="349" fill="#1b2a3a">loss / disturbance</text>
+  <text x="640" y="380" fill="#5b6b7b" font-size="11">Schematic only, not to scale.</text>
+  <text x="640" y="395" fill="#5b6b7b" font-size="11">Based on research/ dossiers</text>
+  <text x="640" y="410" fill="#5b6b7b" font-size="11">01, 02, 19, 21, 22, 27.</text>
+</svg>

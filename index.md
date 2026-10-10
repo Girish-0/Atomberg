@@ -6,11 +6,14 @@ title: AtomQuest 2026 — Ceiling Fan Aerodynamics Research
 
 Research into aerodynamic opportunities for ceiling fans across 28 real-world Indian room and usage conditions, plus the cross-condition synthesis used to prioritize them.
 
+Start with the [project README](README.md) for the full story: how we started, what we found, and where we are heading.
+
 ## Synthesis
 
 - [Cross-Condition Comparison (28 Conditions)](synthesis/comparison.md)
 - [Scoring Rubric](synthesis/rubric.md)
 - [Gaps](synthesis/gaps.md)
+- [Re-evaluation of Findings & Gaps](synthesis/reevaluation.md)
 - [Cards 01–07](synthesis/cards-01-07.md)
 - [Cards 08–14](synthesis/cards-08-14.md)
 - [Cards 15–21](synthesis/cards-15-21.md)
@@ -19,6 +22,7 @@ Research into aerodynamic opportunities for ceiling fans across 28 real-world In
 ## Research Prompts
 
 - [Room Conditions Research Prompts](research_prompts_room_conditions.md)
+- [Tech & Intelligence Research Prompts (next phase)](research_prompts_tech.md)
 
 ## Condition Dossiers (01–28)
 

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="736" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="28" font-size="17" font-weight="700" fill="#1b2a3a">28 room conditions, scored out of 40</text>
+<text x="20" y="48" fill="#5b6b7b">Bars: Tier 1 ≥30 · Tier 2 24–29 · Tier 3 &lt;24. Outlined = chosen targets. Scores within ±2 are effectively tied.</text>
+<text x="202" y="84" text-anchor="end" fill="#1b2a3a">25 High occupancy</text>
+<rect x="210" y="72" width="410" height="16" rx="3" fill="#1f7a8c"/>
+<text x="626" y="84" fill="#1b2a3a" font-weight="600">33</text>
+<text x="202" y="106" text-anchor="end" fill="#1b2a3a">22 Bed / table under fan</text>
+<rect x="210" y="94" width="388" height="16" rx="3" fill="#1f7a8c" stroke="#e07a00" stroke-width="2.5"/>
+<text x="604" y="106" fill="#1b2a3a" font-weight="600">32</text>
+<text x="202" y="128" text-anchor="end" fill="#1b2a3a">27 Low-speed / sleep</text>
+<rect x="210" y="116" width="388" height="16" rx="3" fill="#1f7a8c" stroke="#e07a00" stroke-width="2.5"/>
+<text x="604" y="128" fill="#1b2a3a" font-weight="600">32</text>
+<text x="202" y="150" text-anchor="end" fill="#1b2a3a">19 Cross-ventilation</text>
+<rect x="210" y="138" width="388" height="16" rx="3" fill="#1f7a8c" stroke="#e07a00" stroke-width="2.5"/>
+<text x="604" y="150" fill="#1b2a3a" font-weight="600">32</text>
+<text x="202" y="172" text-anchor="end" fill="#1b2a3a">01 False-ceiling cove</text>
+<rect x="210" y="160" width="365" height="16" rx="3" fill="#1f7a8c"/>
+<text x="581" y="172" fill="#1b2a3a" font-weight="600">31</text>
+<text x="202" y="194" text-anchor="end" fill="#1b2a3a">09 Long narrow room</text>
+<rect x="210" y="182" width="365" height="16" rx="3" fill="#1f7a8c"/>
+<text x="581" y="194" fill="#1b2a3a" font-weight="600">31</text>
+<text x="202" y="216" text-anchor="end" fill="#1b2a3a">10 Small room</text>
+<rect x="210" y="204" width="365" height="16" rx="3" fill="#1f7a8c"/>
+<text x="581" y="216" fill="#1b2a3a" font-weight="600">31</text>
+<text x="202" y="238" text-anchor="end" fill="#1b2a3a">02 Low ceiling / hugger</text>
+<rect x="210" y="226" width="342" height="16" rx="3" fill="#1f7a8c"/>
+<text x="558" y="238" fill="#1b2a3a" font-weight="600">30</text>
+<text x="202" y="260" text-anchor="end" fill="#1b2a3a">07 Corner / near-wall</text>
+<rect x="210" y="248" width="342" height="16" rx="3" fill="#1f7a8c"/>
+<text x="558" y="260" fill="#1b2a3a" font-weight="600">30</text>
+<text x="202" y="282" text-anchor="end" fill="#1b2a3a">21 Tall wardrobes</text>
+<rect x="210" y="270" width="342" height="16" rx="3" fill="#1f7a8c"/>
+<text x="558" y="282" fill="#1b2a3a" font-weight="600">30</text>
+<text x="202" y="304" text-anchor="end" fill="#1b2a3a">03 High ceiling</text>
+<rect x="210" y="292" width="319" height="16" rx="3" fill="#9fb8c4"/>
+<text x="535" y="304" fill="#1b2a3a" font-weight="600">29</text>
+<text x="202" y="326" text-anchor="end" fill="#1b2a3a">08 Multi-fan hall</text>
+<rect x="210" y="314" width="319" height="16" rx="3" fill="#9fb8c4"/>
+<text x="535" y="326" fill="#1b2a3a" font-weight="600">29</text>
+<text x="202" y="348" text-anchor="end" fill="#1b2a3a">14 Sunlit wall</text>
+<rect x="210" y="336" width="319" height="16" rx="3" fill="#9fb8c4"/>
+<text x="535" y="348" fill="#1b2a3a" font-weight="600">29</text>
+<text x="202" y="370" text-anchor="end" fill="#1b2a3a">23 Mosquito nets</text>
+<rect x="210" y="358" width="319" height="16" rx="3" fill="#9fb8c4"/>
+<text x="535" y="370" fill="#1b2a3a" font-weight="600">29</text>
+<text x="202" y="392" text-anchor="end" fill="#1b2a3a">15 Hot roof</text>
+<rect x="210" y="380" width="296" height="16" rx="3" fill="#9fb8c4"/>
+<text x="512" y="392" fill="#1b2a3a" font-weight="600">28</text>
+<text x="202" y="414" text-anchor="end" fill="#1b2a3a">05 Beams</text>
+<rect x="210" y="402" width="274" height="16" rx="3" fill="#9fb8c4"/>
+<text x="490" y="414" fill="#1b2a3a" font-weight="600">27</text>
+<text x="202" y="436" text-anchor="end" fill="#1b2a3a">06 Light kit</text>
+<rect x="210" y="424" width="274" height="16" rx="3" fill="#9fb8c4"/>
+<text x="490" y="436" fill="#1b2a3a" font-weight="600">27</text>
+<text x="202" y="458" text-anchor="end" fill="#1b2a3a">11 Open plan</text>
+<rect x="210" y="446" width="274" height="16" rx="3" fill="#9fb8c4"/>
+<text x="490" y="458" fill="#1b2a3a" font-weight="600">27</text>
+<text x="202" y="480" text-anchor="end" fill="#1b2a3a">04 Sloped ceiling</text>
+<rect x="210" y="468" width="251" height="16" rx="3" fill="#9fb8c4"/>
+<text x="467" y="480" fill="#1b2a3a" font-weight="600">26</text>
+<text x="202" y="502" text-anchor="end" fill="#1b2a3a">12 Balcony / veranda</text>
+<rect x="210" y="490" width="251" height="16" rx="3" fill="#9fb8c4"/>
+<text x="467" y="502" fill="#1b2a3a" font-weight="600">26</text>
+<text x="202" y="524" text-anchor="end" fill="#1b2a3a">13 Stratification</text>
+<rect x="210" y="512" width="251" height="16" rx="3" fill="#9fb8c4"/>
+<text x="467" y="524" fill="#1b2a3a" font-weight="600">26</text>
+<text x="202" y="546" text-anchor="end" fill="#1b2a3a">16 Humidity / monsoon</text>
+<rect x="210" y="534" width="228" height="16" rx="3" fill="#9fb8c4"/>
+<text x="444" y="546" fill="#1b2a3a" font-weight="600">25</text>
+<text x="202" y="568" text-anchor="end" fill="#1b2a3a">17 Fan + AC</text>
+<rect x="210" y="556" width="228" height="16" rx="3" fill="#9fb8c4"/>
+<text x="444" y="568" fill="#1b2a3a" font-weight="600">25</text>
+<text x="202" y="590" text-anchor="end" fill="#1b2a3a">20 Dust / grease</text>
+<rect x="210" y="578" width="228" height="16" rx="3" fill="#9fb8c4"/>
+<text x="444" y="590" fill="#1b2a3a" font-weight="600">25</text>
+<text x="202" y="612" text-anchor="end" fill="#1b2a3a">24 Soft furnishings</text>
+<rect x="210" y="600" width="205" height="16" rx="3" fill="#9fb8c4"/>
+<text x="421" y="612" fill="#1b2a3a" font-weight="600">24</text>
+<text x="202" y="634" text-anchor="end" fill="#1b2a3a">18 Exhaust pressure</text>
+<rect x="210" y="622" width="182" height="16" rx="3" fill="#d9a5a0"/>
+<text x="398" y="634" fill="#1b2a3a" font-weight="600">23</text>
+<text x="202" y="656" text-anchor="end" fill="#1b2a3a">28 Wobble</text>
+<rect x="210" y="644" width="160" height="16" rx="3" fill="#d9a5a0"/>
+<text x="376" y="656" fill="#1b2a3a" font-weight="600">22</text>
+<text x="202" y="678" text-anchor="end" fill="#1b2a3a">26 Voltage / inverter</text>
+<rect x="210" y="666" width="137" height="16" rx="3" fill="#d9a5a0"/>
+<text x="353" y="678" fill="#1b2a3a" font-weight="600">21</text>
+<text x="210" y="706" fill="#5b6b7b">Axis starts at 15 to show spread. Source: synthesis/comparison.md §2</text></svg>
