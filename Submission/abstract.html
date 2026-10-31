@@ -1,0 +1,276 @@
+<!doctype html><html><head><meta charset="utf-8"><title>[TEAM NAME] — Track 1 Abstract</title><style>
+@page { size: A4; margin: 12mm 13mm 12mm 13mm;
+  @bottom-left { content: "AtomQuest 2026 · Track 1 Fan · [TEAM NAME]"; font: 7.5pt 'Noto Sans'; color: #5b6570; }
+  @bottom-right { content: "page " counter(page) " of 3"; font: 7.5pt 'Noto Sans'; color: #5b6570; } }
+@page :first { counter-increment: page 0; @bottom-left { content: none } @bottom-right { content: none } }
+* { box-sizing: border-box; }
+body { font-family: 'Noto Sans', 'Liberation Sans', sans-serif; font-size: 8.55pt; line-height: 1.38; color: #1b2128; margin: 0; }
+h1 { font-size: 25pt; line-height: 1.1; margin: 0 0 6pt; letter-spacing: -.3pt; }
+h2 { font-size: 10.6pt; margin: 9pt 0 3pt; padding-bottom: 2pt; border-bottom: 1.2pt solid #1b2128; letter-spacing: .1pt; }
+h2 .n { color: #0b6e75; margin-right: 4pt; }
+h3 { font-size: 9pt; margin: 6pt 0 1.5pt; color: #0b6e75; }
+p { margin: 0 0 4pt; }
+.lead { font-size: 9.3pt; }
+b, strong { font-weight: 700; }
+.hot { color: #c2410c; } .cool { color: #1d4ed8; } .muted { color: #5b6570; } .acc { color: #0b6e75; }
+table { width: 100%; border-collapse: collapse; margin: 2pt 0 4pt; font-size: 8pt; line-height: 1.3; }
+th { text-align: left; font-weight: 700; border-bottom: 1pt solid #1b2128; padding: 2.2pt 4pt; background: #f1f4f6; }
+td { border-bottom: .5pt solid #cfd5da; padding: 2.2pt 4pt; vertical-align: top; }
+td.num { white-space: nowrap; font-weight: 700; }
+.fig { margin: 3pt 0 2pt; } .fig svg { width: 100%; }
+.cap { font-size: 7.5pt; color: #5b6570; margin: 0 0 4pt; }
+.cols { display: flex; gap: 10pt; } .cols > div { flex: 1; }
+.box { border: .8pt solid #cfd5da; border-left: 3pt solid #0b6e75; padding: 4pt 7pt; margin: 4pt 0; background: #f7f9fa; }
+.box.warn { border-left-color: #c2410c; background: #fff8f4; }
+ul { margin: 1pt 0 4pt; padding-left: 12pt; } li { margin: 0 0 1.5pt; }
+.page { page-break-after: always; }
+.kicker { font-size: 8pt; letter-spacing: 1.6pt; color: #0b6e75; font-weight: 700; text-transform: uppercase; }
+.stats { display: flex; gap: 8pt; margin: 12pt 0; }
+.stat { flex: 1; border-top: 2pt solid #1b2128; padding-top: 4pt; }
+.stat .v { font-size: 17pt; font-weight: 700; line-height: 1.1; } .stat .l { font-size: 8pt; color: #5b6570; }
+.ph { background: #fff3c4; }
+</style></head><body>
+
+<!-- ============ INTRO PAGE (excluded from page count) ============ -->
+<div class="page">
+<p class="kicker">AtomQuest 2026 · Stage 1 Abstract · Track 1 — Fan</p>
+<h1>The Fan That Adapts</h1>
+<p class="lead" style="font-size:11.5pt;max-width:150mm">A 1200 mm BLDC ceiling fan whose <b class="hot">blades reshape themselves with room temperature</b> — no sensor, wire or battery on the rotor — with a <b>climate-aware speed controller</b> and a <b>tiny offline learner</b> built around them.</p>
+
+<div class="stats">
+ <div class="stat"><div class="v">0</div><div class="l">electronics on the rotor — the blade itself is the thermostat</div></div>
+ <div class="stat"><div class="v">+10–15 %</div><div class="l">air at the same RPM when the room is hot (target, to be measured A/B)</div></div>
+ <div class="stat"><div class="v">2 nights</div><div class="l">for the fan to learn a user's comfort offset; &lt; 2 KB RAM, no cloud</div></div>
+ <div class="stat"><div class="v">≈ ₹15 k</div><div class="l">Level-1 prototype; ≈ ₹350–500 added per unit at volume (est.)</div></div>
+</div>
+
+<h2><span class="n">A</span>Team &amp; institutional context</h2>
+<table>
+<tr><th style="width:22%">Team name</th><td class="ph"><b>[TEAM NAME]</b></td></tr>
+<tr><th>Institute</th><td class="ph">[Institute name, City]</td></tr>
+<tr><th>Department / programme</th><td class="ph">[Department / Programme]</td></tr>
+<tr><th>Faculty mentor</th><td class="ph">[Faculty mentor name, designation — or remove row]</td></tr>
+</table>
+<table>
+<tr><th>Member</th><th>Programme &amp; year</th><th>Role in this project</th><th>Email</th><th>Phone</th></tr>
+<tr><td><b>Girish N</b></td><td>[Programme, Year]</td><td>Lead · firmware & learning</td><td>[email]</td><td>[phone]</td></tr>
+<tr><td><b>[Member 2]</b></td><td>[Programme, Year]</td><td>Blade mechanics & aero tests</td><td>[email]</td><td>[phone]</td></tr>
+<tr><td><b>[Member 3]</b></td><td>[Programme, Year]</td><td>Electronics & motor control</td><td>[email]</td><td>[phone]</td></tr>
+<tr><td><b>[Member 4]</b></td><td>[Programme, Year]</td><td>Test rig, data & comfort trials</td><td>[email]</td><td>[phone]</td></tr>
+</table>
+
+<h2><span class="n">B</span>Track &amp; areas of exploration</h2>
+<p><b>Track 1 · Fan.</b> Primary area: <b>blade design for energy efficiency, air throw and low noise.</b> Combined with: <b>fan as a smart-home enabler (ambient temperature &amp; humidity triggers).</b></p>
+<p><b>Why both:</b> a blade that changes shape with heat is only half a product. The motor controller must know the room's temperature and humidity — and know what the blade is already doing — or the two will over-react to the same heat. The same sensors then make the fan the room's climate node for the AC and exhaust fan.</p>
+
+<h2><span class="n">·</span>How we got here</h2>
+<p>Before choosing a solution we mapped where ceiling fans under-perform in Indian homes: <b>28 room/usage conditions</b> (false ceilings, hot roofs, monsoon humidity, beds and mosquito nets under the fan, inverter power, …), each researched against ~600 sources, scored on a fixed rubric and stress-tested in a hostile review. The strongest finding drove everything in this abstract:</p>
+<div class="box"><b>Fans are designed and rated at maximum speed in an open test chamber. They are used at low speed, at night, over a bed, while the room cools several °C and humidity climbs.</b> A fixed blade and a fixed speed step cannot be right for both a 34 °C afternoon and a 25 °C dawn — so the user wakes up and reaches for the remote. We found no fan product or active patent that changes blade shape automatically with the room.</div>
+<p class="muted" style="margin-top:8pt">Reading guide — p.1: idea and quantified claims · p.2: why it is technically feasible, including safety · p.3: components, cost, sourcing risk and the build plan to Round 2.</p>
+</div>
+
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+<h2><span class="n">1</span>The idea — what we are building and how it works</h2>
+<p>We are building a ceiling fan that adapts at three levels. <b class="hot">Body:</b> the outer 35 % of each blade carries a 25 %-chord trailing-edge flap turned by a helical <b>thermostatic-bimetal coil</b> that sits in the blade's own airflow. Above a 28 °C neutral point the flap deflects down (~0.8° per °C), adding camber and effective pitch so every revolution moves more air; below it the flap rises and the fan gives a softer, lower-power draft. Nothing on the rotor needs power — the blade is the thermostat, and it keeps working on a plain wall regulator. <b class="acc">Reflex:</b> a temperature/humidity sensor feeds firmware that converts T × RH into a target air speed at the person (ASHRAE-55 / Indian IMAC comfort models), then shapes RPM into a slow, natural "breeze", an inaudible sleep ramp, or a humid-flush pattern. <b class="acc">Brain:</b> an ESP32-C6 learns each household's comfort offset from their own remote overrides and shifts the Reflex target — fully offline, &lt; 2 KB of RAM. The firmware infers the blade's current shape from motor current, so the mechanics and the software never double-react to the same heat.</p>
+
+<div class="fig"><svg viewBox="0 0 640 196" xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans" font-size="9.5" fill="#1b2128">
+<text x="8" y="14" font-weight="700" font-size="10">Top view · one blade (1200 mm sweep)</text>
+<circle cx="30" cy="92" r="20" fill="#e6e9ec" stroke="#5b6570"/><text x="30" y="95" text-anchor="middle" font-size="8">hub</text>
+<path d="M50,84 L70,62 L292,58 Q300,60 300,66 L300,104 L70,112 L50,100 Z" fill="#dfe5ea" stroke="#1b2128" stroke-width="1.1"/>
+<path d="M214,94 L300,91 L300,104 L214,107 Z" fill="#c2410c" fill-opacity=".85" stroke="#1b2128" stroke-width="1"/>
+<rect x="204" y="91" width="12" height="18" rx="3" fill="#fff" stroke="#1b2128"/>
+<path d="M210,100 m-3,0 a3,3 0 1,1 6,0 a4.5,4.5 0 1,1 -9,0 a6,6 0 1,1 12,0" fill="none" stroke="#1b2128" stroke-width=".8"/>
+<line x1="258" y1="48" x2="258" y2="120" stroke="#5b6570" stroke-dasharray="4 3"/><text x="262" y="45" font-size="8.5">A</text><text x="262" y="124" font-size="8.5">A</text>
+<text x="70" y="52" font-size="8.5" fill="#5b6570">leading edge · rigid aluminium, carries all primary loads</text>
+<text x="176" y="146" font-size="8.5">flap: outer 35 % span × 25 % chord</text><text x="176" y="157" font-size="8.5">~15 g PETG on SS hinge pin</text>
+<line x1="236" y1="137" x2="250" y2="106" stroke="#1b2128" stroke-width=".6"/>
+<text x="8" y="150" font-size="8.5">bimetal coil in fairing at flap</text><text x="8" y="161" font-size="8.5">root (r ≈ 0.44 m) — senses</text><text x="8" y="172" font-size="8.5">room air directly</text>
+<line x1="120" y1="141" x2="204" y2="106" stroke="#1b2128" stroke-width=".6"/>
+<text x="334" y="14" font-weight="700" font-size="10">Section A–A · what the coil does</text>
+<path d="M336,122 Q420,78 500,110.5 L500,114 Q420,87 338,125 Z" fill="#dfe5ea" stroke="#1b2128" stroke-width="1.1"/>
+<path d="M496.1,109.2 L557.9,114.6 L557.9,115.7 L495.9,114.4 Z" fill="none" stroke="#1d4ed8" stroke-width="1.3" stroke-dasharray="4 2"/>
+<path d="M496.5,108.8 L557.3,120.7 L557.2,121.8 L495.6,113.9 Z" fill="none" stroke="#5b6570" stroke-width="1.3" stroke-dasharray="1.5 2"/>
+<path d="M496.9,108.3 L555.6,128.6 L555.3,129.6 L495.4,113.3 Z" fill="#c2410c" stroke="#c2410c" stroke-width="1.3" />
+<circle cx="500" cy="112" r="3.4" fill="#fff" stroke="#1b2128" stroke-width="1.2"/>
+<text x="566" y="111" fill="#1d4ed8" font-size="8.8">20 °C · −6°</text>
+<text x="566" y="124" fill="#5b6570" font-size="8.8">28 °C · stock</text>
+<text x="566" y="139" fill="#c2410c" font-size="8.8" font-weight="700">38 °C · +8°</text>
+<text x="342" y="150" font-size="8.5">≈ 0.8° of flap per °C  (θ = k·L·ΔT / t)</text>
+<text x="342" y="162" font-size="8.5">hot → more camber &amp; effective pitch → more air per rev</text>
+<text x="342" y="174" font-size="8.5">cool → flatter → softer draft, lower power per rev</text>
+<text x="342" y="186" font-size="8.5" fill="#5b6570">hard stops −6° / +10° · rotation 15–19 m/s at flap</text>
+<path d="M352,40 l12,0" stroke="#1b2128" marker-end="url(#a)"/><text x="368" y="43" font-size="8.5">blade motion</text>
+<path d="M430,40 l0,14" stroke="#1b2128" marker-end="url(#a)"/><text x="436" y="50" font-size="8.5">air pushed down</text>
+<defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1b2128"/></marker></defs>
+</svg></div>
+<p class="cap">Fig. 1 — The Body layer. The rigid front 75 % of the blade is unchanged and carries every primary load; only a light flap moves. Coil length 250 mm, strip 20 × 0.5 mm, high-flexivity bimetal.</p>
+
+<h2><span class="n">2</span>Baseline vs target — what we will prove, and how</h2>
+<table>
+<tr><th style="width:27%">Metric</th><th style="width:20%">Baseline (today's fan)</th><th style="width:21%">Our target</th><th>How we measure it</th></tr>
+<tr><td>Air delivery at a fixed speed setting, room at 35 °C vs 22 °C</td><td>0 % — blade is fixed</td><td class="num"><span class="hot">+10 to +15 % hot</span><br><span class="cool">−8 to −10 % cool</span></td><td>Same motor &amp; RPM, swap stock ↔ morphing blades (true A/B); anemometer grid 1.5 m below</td></tr>
+<tr><td>Power at a fixed speed setting in a cool room (20–22 °C)</td><td>unchanged</td><td class="num">≈ −20 to −25 %</td><td>Wattmeter on driver input</td></tr>
+<tr><td>Energy / electronics needed for that adaptation</td><td>—</td><td class="num">0 W · 0 sensors on rotor</td><td>By design; demo with electronics switched off</td></tr>
+<tr><td>Flap response to a room temperature step</td><td>—</td><td class="num">τ ≈ 10–30 s · ≥ 0.6°/°C</td><td>Thermal chamber 15 → 45 °C, laser-on-mirror</td></tr>
+<tr><td>Mean RPM needed for the same comfort vote (breeze vs steady air)</td><td>steady RPM</td><td class="num">≥ 10 % lower RPM (≈ −25 % motor power)</td><td>Blind A/B, ≥ 8 volunteers, sensation vote at 30 °C</td></tr>
+<tr><td>Night: speed-change rate &amp; noise at bed height</td><td>step change per speed level</td><td class="num">≤ 3 RPM/s ramps · ≤ 32 dB(A)</td><td>Sound meter 1.2 m below hub; RPM log from tach</td></tr>
+<tr><td>Manual remote corrections per night</td><td>logged in week 1 (3 users)</td><td class="num">≤ 0.3 after 7 nights</td><td>30-day synthetic user, then live logs</td></tr>
+<tr><td>AC set-point at equal comfort <span class="muted">(stretch)</span></td><td>24 °C</td><td class="num">26 °C (≈ −12 % AC energy)</td><td>BEE: ~6 % AC energy per °C</td></tr>
+</table>
+
+<h2><span class="n">3</span>Why we believe this is new</h2>
+<ul>
+<li><b>A passively morphing ceiling-fan blade.</b> Passive thermal pitch control exists only in an expired 1982 automotive engine-fan patent (US 4,487,551); fan patents we found change pitch only manually. Full search before Round 2.</li>
+<li><b>Motor current as a blade-shape sensor.</b> A morphed blade needs more torque at the same RPM; the driver's current-vs-RPM residual tells the firmware the flap angle for free — closing the loop between passive mechanics and active control.</li>
+<li><b>Learning a comfort offset, not a schedule.</b> "Speed 4 at 11 pm" learned in a heatwave misfires in the monsoon; "this user likes 1 °C cooler than the model" does not.</li>
+</ul>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+<h2><span class="n">4</span>Technical feasibility — how it works and why it is buildable</h2>
+
+<h3>Body — the morphing blade (numbers we designed to)</h3>
+<p><b>Actuator choice.</b> We compared eight smart materials. <b>Thermostatic bimetal</b> wins: linear, no functional hysteresis or fatigue, cheap, and proven for decades inside rotating automotive fan clutches. NiTi shape-memory wire with a steel bias spring is our backup (two-state "snap" version at the blade root); shape-memory polymers and liquid-crystal elastomers creep under centrifugal load, wax actuators weigh 50–120 g and take minutes, and "trained" two-way NiTi loses 30–60 % of its stroke over time.</p>
+<p><b>Stroke.</b> Coil rotation θ = k·L·ΔT / t: with specific curvature k ≈ 28 × 10⁻⁶ K⁻¹ (high-flex grade, to confirm on datasheet), L = 250 mm, t = 0.5 mm → <b>≈ 0.8° per °C</b>, ±8° over a ±10 °C swing. With flap effectiveness ≈ 0.5, that is ~4° effective angle change on the outer span — which, by r² weighting, produces ~60 % of the blade's thrust. Since flow scales roughly with √thrust, <b>+10–15 % air delivery</b> at the same RPM is a conservative blade-element estimate.</p>
+<p><b>Loads.</b> Dynamic pressure at the flap (r ≈ 0.52 m, 350 RPM) is ≈ 220 Pa, giving a hinge moment of ≈ 3 N·mm. Coil stiffness is ≈ 2 N·mm per degree (blocked torque ≈ 17 N·mm per 10 °C), and a 20 % overhang balance halves the air load → <b>speed-induced flap error &lt; 1°</b>; the slight back-off at top speed acts as a natural limiter. Centrifugal pull on the 15 g flap is <b>10 N at 350 RPM and 16 N at the 1.25× overspeed test (438 RPM)</b>, taken axially by a thrust shoulder on a 3 mm stainless hinge pin rated well over 1 kN.</p>
+<p><b>Thermal response.</b> A 0.5 mm steel strip in 5–19 m/s airflow has a time constant of ≈ 10–30 s — the blade tracks the room, not the motor (the coil sits 0.44 m from the hub). Ceiling-level air is 1–2 °C warmer than at the bed; the neutral point is set by rotating the coil arbor (a calibration screw), not by changing parts.</p>
+
+<h3>Reflex — climate-tuned speed patterns</h3>
+<p>Air movement of ~1 m/s at the occupant offsets ≈ 2–3 °C of operative temperature (ASHRAE 55, SET method). A 16-row T × RH map (50–350 RPM) sets the base speed. Human studies show fluctuating airflow at <b>0.2–1 Hz with a 1/f ("natural wind") spectrum</b> feels cooler than steady air at the same mean speed. The rotor's inertia (≈ 0.06 kg·m²) makes 0.5 Hz speed swings costly (~+28 % energy), so we split the job: firmware makes <b>slow ±10–15 % swings over 10–30 s with jerk-limited S-curves (≤ 12 RPM/s, ≤ 10 % extra torque)</b>, and the blade wake supplies the fast gusts. <b>Sleep</b> holds a ≤ 150 RPM band and ramps at ≤ 3 RPM/s as the room cools. <b>Humid-flush</b> (≥ 32 °C and ≥ 70 % RH, where extra speed adds little evaporative cooling) uses a low base speed with a short burst every ~45 s.</p>
+
+<h3>Brain — tiny offline learning</h3>
+<p>Overrides are binned by half-hour × {awake, asleep} into a table of comfort offsets (°C) with Beta-Bayesian confidence. A change is adopted only if it repeats on <b>two consecutive nights</b>; one-offs decay. It runs in <b>&lt; 2 KB RAM and &lt; 100 cycles per update</b> on an ESP32-C6 (≈ ₹113 at volume, Wi-Fi 6/BLE/Thread → Matter). We rejected on-device neural networks (forgetting, flash wear) and bandit "exploration" (nobody wants an experiment at 2 am). A 24 GHz radar sees a <b>sleeping</b> person's breathing where PIR fails; lights-off marks bedtime. Cold start uses the physics map; seasons shifting the weekly mean temperature fall back to physics until new habits form; two disagreeing users default to the lower speed. Learned data is saved daily plus a brown-out-triggered save (~12 ms); everything stays on the device.</p>
+
+<div class="box warn"><b>Safety-critical aspects.</b> (1) <b>No electronics, wiring or slip rings on the rotor.</b> (2) Flap retained by pin + thrust shoulder designed for the 438 RPM overspeed case; hard stops at −6° / +10° prevent over-travel above 45 °C; a light torsion spring returns the flap to the stock (neutral) shape if a coil breaks — failure looks like a normal fan. (3) Three actuators matched as a set; blade-tip tracking ≤ 2 mm verified by strobe before every spin test; spin tests run behind a mesh guard. (4) Bimetal isolated from aluminium by POM bushes and nickel plating (monsoon galvanic corrosion). (5) A manual command always overrides automation within 50 ms; RPM limits are clamped in the driver; a watchdog falls back to the last manual speed. (6) Our prototype electronics are <b>24 V SELV</b> — no team-built mains circuitry; the product path is a UART link to the fan's existing controller.</div>
+
+<h3>Situations it handles — one product, not eight modes</h3>
+<table>
+<tr><th style="width:34%">Situation</th><th>What the fan does</th><th style="width:16%">Layer</th></tr>
+<tr><td>Hot afternoon, 34 °C / 50 % RH</td><td>Flaps down (more air per rev) + breeze pattern at a higher target speed</td><td>Body + Reflex</td></tr>
+<tr><td>Cool dawn or winter, 22–25 °C</td><td>Flaps up — softer, lower-power draft; base speed steps down without a click</td><td>Body + Reflex</td></tr>
+<tr><td>Monsoon, 30 °C / 80 % RH</td><td>Humid-flush bursts instead of pointless top speed</td><td>Reflex</td></tr>
+<tr><td>Person asleep and still</td><td>Radar keeps Sleep mode on (a PIR fan would switch off)</td><td>Brain</td></tr>
+<tr><td>User always wants it cooler around 1 am</td><td>Learns a −1 °C offset; applies it from night 3</td><td>Brain</td></tr>
+<tr><td>Power cut, Wi-Fi down, plain regulator</td><td>Blades still adapt; learned habits survive in flash</td><td>Body</td></tr>
+<tr><td>Electronics fault</td><td>Watchdog → last manual speed; blade adaptation unaffected</td><td>Safety</td></tr>
+</table>
+</div>
+
+<!-- ============ PAGE 3 ============ -->
+<div>
+<h2><span class="n">5</span>Execution feasibility</h2>
+<h3>System-level block diagram</h3>
+<div class="fig"><svg viewBox="0 0 700 262" xmlns="http://www.w3.org/2000/svg" font-family="Noto Sans" font-size="9.3" fill="#1b2128">
+<defs><marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="context-stroke"/></marker></defs>
+<rect x="4" y="6" width="92" height="250" rx="5" fill="#f3f5f7" stroke="#5b6570" stroke-width="1.1" />
+<text x="11" y="19" font-weight="700" fill="#5b6570">ROOM</text>
+<rect x="12" y="26" width="76" height="34" rx="4" fill="#fff" stroke="#5b6570"/><text x="18" y="40" font-size="8.8" font-weight="700">Temperature</text><text x="18" y="52" font-size="8" fill="#5b6570">& humidity</text>
+<rect x="12" y="70" width="76" height="34" rx="4" fill="#fff" stroke="#5b6570"/><text x="18" y="84" font-size="8.8" font-weight="700">Person</text><text x="18" y="96" font-size="8" fill="#5b6570">awake / asleep</text>
+<rect x="12" y="114" width="76" height="34" rx="4" fill="#fff" stroke="#5b6570"/><text x="18" y="128" font-size="8.8" font-weight="700">Light level</text><text x="18" y="140" font-size="8" fill="#5b6570">lights-off = bed</text>
+<rect x="12" y="158" width="76" height="34" rx="4" fill="#fff" stroke="#5b6570"/><text x="18" y="172" font-size="8.8" font-weight="700">User</text><text x="18" y="184" font-size="8" fill="#5b6570">remote · app</text>
+<rect x="12" y="206" width="76" height="40" rx="4" fill="#fff" stroke="#c2410c"/><text x="18" y="221" font-size="8.8" font-weight="700" fill="#c2410c">Room air</text><text x="18" y="233" font-size="8" fill="#5b6570">reaches blade</text><text x="18" y="242" font-size="8" fill="#5b6570">directly</text>
+<rect x="112" y="6" width="104" height="196" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="119" y="19" font-weight="700" fill="#1b2128">SENSORS (3.3 V)</text>
+<text x="120" y="40" font-size="8.8" font-weight="700">SHT40</text><text x="120" y="52" font-size="8" fill="#5b6570">T ±0.2 °C, RH ±1.8 %</text>
+<path d="M88,43 L110,43" fill="none" stroke="#5b6570" stroke-width="1.2"  marker-end="url(#b)"/>
+<text x="120" y="84" font-size="8.8" font-weight="700">LD2410 radar</text><text x="120" y="96" font-size="8" fill="#5b6570">24 GHz · breathing</text>
+<path d="M88,87 L110,87" fill="none" stroke="#5b6570" stroke-width="1.2"  marker-end="url(#b)"/>
+<text x="120" y="128" font-size="8.8" font-weight="700">Ambient light</text><text x="120" y="140" font-size="8" fill="#5b6570">VEML7700</text>
+<path d="M88,131 L110,131" fill="none" stroke="#5b6570" stroke-width="1.2"  marker-end="url(#b)"/>
+<text x="120" y="172" font-size="8.8" font-weight="700">IR receiver</text><text x="120" y="184" font-size="8" fill="#5b6570">existing remote</text>
+<path d="M88,175 L110,175" fill="none" stroke="#5b6570" stroke-width="1.2"  marker-end="url(#b)"/>
+<rect x="234" y="6" width="214" height="196" rx="5" fill="#eef6f6" stroke="#0b6e75" stroke-width="1.1" />
+<text x="241" y="19" font-weight="700" fill="#0b6e75">ESP32-C6  (RISC-V 160 MHz, offline)</text>
+<rect x="244" y="26" width="194" height="38" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="251" y="39" font-weight="700" fill="#1b2128">BRAIN · habit learner</text>
+<text x="251" y="51.0" font-size="8.3" fill="#5b6570">Bayesian table + 2-night rule → comfort offset</text>
+<rect x="244" y="72" width="194" height="50" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="251" y="85" font-weight="700" fill="#1b2128">REFLEX · comfort controller</text>
+<text x="251" y="97.0" font-size="8.3" fill="#5b6570">T×RH → target air speed (SET / IMAC)</text>
+<text x="251" y="107.5" font-size="8.3" fill="#5b6570">→ Breeze · Sleep · Humid-flush RPM profile</text>
+<rect x="344" y="130" width="94" height="64" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="351" y="143" font-weight="700" fill="#1b2128">Blade-state</text>
+<text x="351" y="155.0" font-size="8.3" fill="#5b6570">current vs RPM</text>
+<text x="351" y="165.5" font-size="8.3" fill="#5b6570">residual → flap</text>
+<text x="351" y="176.0" font-size="8.3" fill="#5b6570">angle estimate</text>
+<rect x="244" y="130" width="94" height="64" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="251" y="143" font-weight="700" fill="#1b2128">Safety</text>
+<text x="251" y="155.0" font-size="8.3" fill="#5b6570">manual wins <50 ms</text>
+<text x="251" y="165.5" font-size="8.3" fill="#5b6570">RPM clamps</text>
+<text x="251" y="176.0" font-size="8.3" fill="#5b6570">watchdog, brown-out</text>
+<path d="M341,64 L341,70" fill="none" stroke="#0b6e75" stroke-width="1.2"  marker-end="url(#b)"/>
+<path d="M216,104 L242,104" fill="none" stroke="#1b2128" stroke-width="1.2"  marker-end="url(#b)"/>
+<path d="M391,128 L391,123" fill="none" stroke="#0b6e75" stroke-width="1.2"  marker-end="url(#b)"/>
+<rect x="468" y="6" width="100" height="74" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="475" y="19" font-weight="700" fill="#1b2128">BLDC DRIVER</text>
+<text x="475" y="31.0" font-size="8.3" fill="#5b6570">24 V SELV (proto)</text>
+<text x="475" y="41.5" font-size="8.3" fill="#5b6570">UART / PWM in</text>
+<text x="475" y="52.0" font-size="8.3" fill="#5b6570">INA226 current, tach</text>
+<path d="M438,92 L452,92 L452,44 L466,44" fill="none" stroke="#1b2128" stroke-width="1.2"  marker-end="url(#b)"/>
+<rect x="586" y="6" width="108" height="74" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="593" y="19" font-weight="700" fill="#1b2128">MOTOR</text>
+<text x="593" y="31.0" font-size="8.3" fill="#5b6570">1200 mm ceiling fan</text>
+<text x="593" y="41.5" font-size="8.3" fill="#5b6570">50–350 RPM</text>
+<text x="593" y="52.0" font-size="8.3" fill="#5b6570">I ≈ 0.06 kg·m²</text>
+<path d="M568,43 L584,43" fill="none" stroke="#1b2128" stroke-width="1.2"  marker-end="url(#b)"/>
+<rect x="468" y="100" width="226" height="102" rx="5" fill="#fff4ee" stroke="#c2410c" stroke-width="1.1" />
+<text x="475" y="113" font-weight="700" fill="#c2410c">ROTOR · BODY  (no electronics)</text>
+<text x="475" y="125.0" font-size="8.3" fill="#5b6570">3 blades, each with bimetal coil → trailing-edge flap</text>
+<text x="475" y="135.5" font-size="8.3" fill="#5b6570">• +0.8° flap per °C, τ ≈ 10–30 s</text>
+<text x="475" y="146.0" font-size="8.3" fill="#5b6570">• matched in sets of 3, tip tracking ≤ 2 mm</text>
+<text x="475" y="156.5" font-size="8.3" fill="#5b6570">• fails safe to stock (neutral) blade shape</text>
+<path d="M640,80 L640,98" fill="none" stroke="#1b2128" stroke-width="1.2"  marker-end="url(#b)"/><text x="646" y="93" font-size="8" fill="#1b2128">torque</text>
+<path d="M500,99 L500,83" fill="none" stroke="#0b6e75" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#b)"/>
+<text x="505" y="93" font-size="7.8" fill="#0b6e75">flap load → current</text>
+<path d="M468,66 L460,66 L460,160 L440,160" fill="none" stroke="#0b6e75" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#b)"/>
+<path d="M88,226 L600,226 L600,204" fill="none" stroke="#c2410c" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#b)"/><text x="300" y="221" font-size="8" fill="#c2410c">PASSIVE PATH — room heat reshapes the blade, electronics off</text>
+<path d="M660,202 L660,230" fill="none" stroke="#1b2128" stroke-width="1.2"  marker-end="url(#b)"/>
+<rect x="468" y="232" width="226" height="26" rx="5" fill="#fff" stroke="#1b2128" stroke-width="1.1" />
+<text x="475" y="245" font-weight="700" fill="#1b2128">→ Air speed & gust pattern at the person</text>
+<rect x="112" y="232" width="336" height="26" rx="5" fill="#fff" stroke="#5b6570" stroke-width="1.1" stroke-dasharray="3 2"/>
+<text x="119" y="245" font-weight="700" fill="#5b6570">Matter / BLE → AC set-point, exhaust fan, app (stretch)</text>
+<path d="M260,202 L260,230" fill="none" stroke="#5b6570" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#b)"/>
+</svg></div>
+<p class="cap">Fig. 2 — Two independent paths reach the air: an electronic path (sensors → ESP32-C6 → driver → motor) and a passive path (room air → bimetal → flap). Motor current closes the loop between them.</p>
+
+<div class="cols">
+<div>
+<h3>Components &amp; rough BOM (Level-1 prototype)</h3>
+<table>
+<tr><th>Item</th><th>≈ ₹</th><th>Risk</th></tr>
+<tr><td>1200 mm 24 V BLDC ceiling fan + 2nd blade set (stock A/B reference)</td><td class="num">4,500</td><td class="hot">Med</td></tr>
+<tr><td>High-flex bimetal strip, 1 m (coils wound in-house)</td><td class="num">1,200</td><td class="hot">Med</td></tr>
+<tr><td>NiTi wire + bias springs (Concept B backup)</td><td class="num">1,300</td><td>Low</td></tr>
+<tr><td>PETG flaps, SS pins, POM bushes, torsion springs</td><td class="num">1,500</td><td>Low</td></tr>
+<tr><td>ESP32-C6 DevKit, SHT40, LD2410, VEML7700, IR rx</td><td class="num">2,000</td><td>Low</td></tr>
+<tr><td>INA226, optical tach, 24 V SMPS, buck, wiring</td><td class="num">1,200</td><td>Low</td></tr>
+<tr><td>Vane anemometer, sound meter, thermal test box</td><td class="num">3,300</td><td>Low</td></tr>
+<tr><td><b>Total (order of magnitude)</b></td><td class="num">≈ 15,000</td><td></td></tr>
+</table>
+<p class="muted" style="font-size:7.6pt">At volume (our estimate): 3 coils + flaps + pins ≈ ₹150–250; sensors + MCU ≈ ₹200–250, less if the fan's existing Wi-Fi module hosts the firmware.</p>
+</div>
+<div>
+<h3>Component sourcing risk</h3>
+<ul>
+<li><b>Bimetal strip</b> — Indian manufacturer (Shivalik Bimetal), but sample lead time may be 1–3 weeks. <i>Fallback:</i> coils from dial thermometers / automotive fan-clutch spares for the first static tests.</li>
+<li><b>24 V BLDC fan</b> — must accept an external speed command. <i>Fallback:</i> off-the-shelf 24 V sensorless BLDC driver.</li>
+<li><b>Custom-fabricated:</b> flaps (3D-printed), coil winding + stress relief, trailing-edge slot machining — all in-house.</li>
+<li><b>Imported:</b> LD2410, ESP32-C6 modules — stocked by Indian distributors; nothing long-lead.</li>
+</ul>
+<h3>What we deliberately do not claim</h3>
+<p style="font-size:8pt">Morphing does not give "free" air: by momentum theory +12 % flow costs ~+40 % ideal power whichever way you get it. The gain is <b>who decides</b> (the blade, passively), a <b>lower-power gentle mode</b> when cool, and — our hypothesis to test — <b>less noise</b> than buying the same air with tip speed (+12 % RPM ≈ +2.5 dB by V⁵ scaling).</p>
+</div>
+</div>
+
+<h3>Build plan to Round 2 — a working Level-1 prototype</h3>
+<table>
+<tr><th style="width:9%">Week</th><th style="width:47%">Body (mechanics)</th><th>Reflex + Brain (firmware)</th></tr>
+<tr><td><b>1</b></td><td>Order parts; wind &amp; stress-relieve 4 coils; static chamber 15 → 45 °C. <b>Go/no-go:</b> ≥ 0.6°/°C, trio matched within ±0.1°/°C — else switch to NiTi root hinge (Concept B).</td><td>ESP32-C6 bring-up: SHT40, radar, IR remote decode, tach, INA226; closed-loop RPM control on the 24 V driver.</td></tr>
+<tr><td><b>2</b></td><td>Slot blades, fit flaps; spin test 50 → 350 → 438 RPM behind guard; strobe tip tracking; record current-vs-RPM signature at each flap angle.</td><td>T × RH map + Breeze / Sleep / Humid-flush profiles; habit learner validated on a 30-day synthetic user on PC, then ported.</td></tr>
+<tr><td><b>3</b></td><td>A/B airflow grid (stock vs morphing set) with the room at ~22 °C and heated to ~35 °C; power and noise at each speed.</td><td>Blade-state estimator from current residual; integrate all three layers; safety overrides &amp; watchdog tests.</td></tr>
+<tr><td><b>4</b></td><td colspan="2"><b>Level-1 demo:</b> one fan, three layers. Warm the blade and watch the flap move with every electronic switched off; anemometer reading rises live. Then a live dashboard of T, RH, RPM, estimated flap angle and learned offset — plus our measured data pack against every target in Section 2.</td></tr>
+</table>
+</div>
+</body></html>
